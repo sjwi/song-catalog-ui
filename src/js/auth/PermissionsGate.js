@@ -1,6 +1,6 @@
 import { cloneElement } from "react";
 import { PERMISSIONS } from "./PermissionsMap";
-import { getUserRole } from "./GetUserRole";
+import { getUserRole } from "./TokenManager";
 
 const hasPermission = ({ permissions, scopes }) => {
   const scopesMap = {};

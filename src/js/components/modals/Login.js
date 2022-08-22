@@ -1,9 +1,10 @@
-import React, { useState, Fragment, Component, useEffect } from 'react'
+import React, { useState, Fragment } from 'react'
 import { Transition, Dialog } from '@headlessui/react'
 import axios from 'axios';
 import { BASE_URL } from 'js/clients/ClientConfig';
-import getUserRole from 'js/auth/GetUserRole';
+import { getUserRole, setSessionToken } from 'js/auth/TokenManager';
 import useAPIError from 'js/hooks/useAPIError';
+import { setAuthToken } from 'js/clients/AxiosDefaults';
 
 const Login = (props) => {
   const { addError } = useAPIError();
@@ -21,14 +22,14 @@ const Login = (props) => {
     setFormDisabled(true);
     axios.post(BASE_URL + "/login", loginPayload)
       .then(response => {
-        console.log(response.headers)
-        localStorage.setItem('token', response.headers.authorization.split(" ")[1]);
+        setSessionToken(response.headers.authorization.split(" ")[1]);
         props.setRole(getUserRole());
         props.setIsOpen(false);
+        setAuthToken();
         setAuthError();
       })
       .catch(error => {
-        if (error.response && (error.response.status == 401 || error.response.status == 403)) {
+        if (error.response && (error.response.status === 401 || error.response.status === 403)) {
           setAuthError("Incorrect username or password");
           return;
         }
@@ -68,6 +69,7 @@ const Login = (props) => {
               <Dialog.Panel className="justify-center items-center w-full shadow rounded-lg bg-white px-6 flex flex-col md:w-1/2 lg:w-1/3 m-auto">
                 <Dialog.Title>
                   <img className="block h-8 w-auto my-4 h-16 w-fill object-cover"
+                    alt="Logo"
                     src="/images/logo_transparent.png"
                   />
                 </Dialog.Title>

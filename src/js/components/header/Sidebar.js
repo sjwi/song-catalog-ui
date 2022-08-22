@@ -20,22 +20,22 @@ export default class Sidebar extends Component {
             leaveTo="-translate-x-full"
             as={Fragment}
             >
-            <div className="flex relative z-10 flex-col w-72 h-screen bg-blue border-r border-gray-200 md:hidden">
+            <div className="flex relative z-10 flex-col w-72 h-screen bg-blue border-r md:hidden">
               <button
                 type="Button" onClick={() => this.props.setIsOpen(false)} value="Close sidebar"
-                className="hover:ring-1 hover:ring-grey-300 flex absolute top-2 right-2 justify-center items-center w-10 h-10 rounded-full focus:outline-none focus:ring-1 focus:ring-white">
+                className="hover:ring-1 hover:ring-grey-300 flex absolute top-2 right-2 justify-center items-center w-10 h-10 rounded-full">
                 <XIcon className="h-6 w-6 text-white" />
               </button>
               <div className="md:hidden">
-                <div className="px-2 pt-2 pb-3 space-y-1">
+                <div className="px-2 pt-2 mt-8 pb-3 space-y-1">
                   {this.props.navigation.map((item) => (
                     <button
                       key={item.name}
                       as="a"
                       href={item.href}
                       className={classNames(
-                        item.current ? 'bg-gray-900' : 'hover:bg-gray-700 hover:text-grey-300',
-                        'block px-3 py-2 rounded-md text-base font-medium text-white'
+                        item.current ? '' : 'hover:text-grey-300',
+                        'block px-3 py-2 rounded-md text-base font-medium text-white text-lg'
                       )}
                       aria-current={item.current ? 'page' : undefined}
                     >

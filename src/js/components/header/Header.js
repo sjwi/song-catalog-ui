@@ -6,7 +6,7 @@ import Search from './Search'
 import Sidebar from './Sidebar'
 import Login from '../modals/Login.js'
 import { classNames } from 'js/functions/styling'
-import getUserRole from 'js/auth/GetUserRole'
+import { getUserRole, getUserObject } from 'js/auth/TokenManager'
 import { ROLES } from 'js/auth/PermissionsMap'
 import APIErrorNotification from '../errors/APIErrorNotification'
 
@@ -32,7 +32,7 @@ export default function Header() {
               <div className="relative flex items-center justify-between h-14">
                 <div className="absolute inset-y-0 left-0 flex items-center md:hidden">
                   {/* Mobile menu button*/}
-                  <button onClick={() => setIsNavOpen(true)} className="inline-flex items-center justify-center p-2 rounded-md text-white-400 hover:text-white hover:bg-gray-700 focus:outline-none focus:ring-1 focus:ring-inset focus:ring-white text-white">
+                  <button onClick={() => setIsNavOpen(true)} className="inline-flex items-center justify-center p-2 rounded-md text-white-400 hover:text-white focus:outline-none focus:ring-1 focus:ring-inset focus:ring-white text-white">
                     <span className="sr-only">Open main menu</span>
                     {open ? (
                       <XIcon className="block h-6 w-6" aria-hidden="true" />
@@ -45,12 +45,12 @@ export default function Header() {
                 <div className="flex-1 flex items-center justify-center md:items-stretch md:justify-start">
                   <div className="flex-shrink-0 flex items-center">
                     <img
-                      className="block md:hidden h-8 w-auto"
+                      className="block md:hidden h-10 w-fill object-cover"
                       src="/images/favicon_white.png"
                       alt="Workflow"
                     />
                     <img
-                      className="hidden md:block h-8 w-auto"
+                      className="hidden md:block h-10 w-fill object-cover"
                       src="/images/favicon_white.png"
                       alt="Workflow"
                     />
@@ -62,7 +62,7 @@ export default function Header() {
                           key={item.name}
                           href={item.href}
                           className={classNames(
-                            item.current ? 'bg-gray-900' : 'hover:bg-gray-700 hover:text-grey-300',
+                            item.current ? '' : 'hover:text-grey-300',
                             'px-3 py-2 rounded-md text-sm text-white font-medium'
                           )}
                           aria-current={item.current ? 'page' : undefined}
@@ -82,11 +82,11 @@ export default function Header() {
                     </button>
                   }
                   {role != ROLES.viewer &&
-                    <Menu as="div" className="ml-3 relative">
+                    <Menu as="div" className="ml-3 relative z-30">
                       <div>
-                        <Menu.Button className="bg-gray-800 flex text-sm focus:outline-none focus:text-grey-300">
+                        <Menu.Button className="flex text-sm focus:outline-none focus:text-grey-300">
                           <span className="sr-only">Open user menu</span>
-                          <span className="text-white hover:text-grey-300 focus:text-grey-300">Stephen</span>
+                          <span className="text-white hover:text-grey-300 focus:text-grey-300">{getUserObject().firstName}</span>
                           <ChevronDownIcon className="h-3 w-3 my-auto ml-2 text-white hover:text-grey-300" aria-hidden="true" />
                         </Menu.Button>
                       </div>
@@ -104,7 +104,7 @@ export default function Header() {
                             {({ active }) => (
                               <a
                                 href="#"
-                                className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
+                                className={classNames(active ? '' : '', 'block px-4 py-2 text-sm')}
                               >
                                 Your Profile
                               </a>
@@ -114,7 +114,7 @@ export default function Header() {
                             {({ active }) => (
                               <a
                                 href="#"
-                                className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
+                                className={classNames(active ? '' : '', 'block px-4 py-2 text-sm')}
                               >
                                 Settings
                               </a>
@@ -125,7 +125,7 @@ export default function Header() {
                               <a
                                 onClick={() => {localStorage.removeItem('token'); setRole(ROLES.viewer) }}
                                 href="#"
-                                className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
+                                className={classNames(active ? '' : '', 'block px-4 py-2 text-sm')}
                               >
                                 Sign out
                               </a>
