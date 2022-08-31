@@ -25,7 +25,7 @@ export default function Header() {
       <Sidebar navigation={navigation} isOpen={isNavOpen} setIsOpen={setIsNavOpen} />
       <Login isOpen={isLoginOpen} setIsOpen={setIsLoginOpen} setRole={setRole} />
       <APIErrorNotification />
-      <Disclosure as="nav" className="bg-blue">
+      <Disclosure as="nav" className="bg-blue min-w-screen">
         {({ open }) => (
           <>
             <div className="max-w-7xl mx-auto px-2 md:px-6 lg:px-8">
@@ -76,7 +76,7 @@ export default function Header() {
                 <div className="absolute inset-y-0 right-0 flex items-center pr-2 md:static md:inset-auto md:ml-6 md:pr-0">
                   <Search classes="hidden md:block" />
                   {role == ROLES.viewer &&
-                    <button className="text-white text-xl background-transparent font-bold px-2 text-xs outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" type="button"
+                    <button className="text-white text-xl background-transparent font-bold px-2 text-xs outline-none focus:outline-none my-1 mx-1 ease-linear transition-all duration-150" type="button"
                       onClick={() => setIsLoginOpen(true)}>
                       Login
                     </button>

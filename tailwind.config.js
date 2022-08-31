@@ -14,6 +14,7 @@ module.exports = {
     },
     colors: {
       'blue': '#00b3ff',
+      'l-blue': '#c5d9e0',
       'primary': '#4B4B4B',
       'cus-grey': '#e7ecef',
       'cus-gray': '#e7ecef',

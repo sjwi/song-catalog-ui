@@ -15,11 +15,20 @@ import Home from './pages/home/Home';
 function App() {
   const [ songs, setSongs ] = useState([]);
   const [ songsLoading, setSongsLoading ] = useState(true);
+  const [ sets, setSets ] = useState([]);
+  const [ setsLoading, setSetsLoading ] = useState(true);
   useEffect(() => {
     axios.get(BASE_URL + '/songs')
       .then((response) => {
         setSongs(response.data);
         setSongsLoading(false);
+      })
+  },[])
+  useEffect(() => {
+    axios.get(BASE_URL + '/setlists')
+      .then((response) => {
+        setSets(response.data);
+        setSetsLoading(false);
       })
   },[])
   if (process.env.NODE_ENV === 'production') {
@@ -32,7 +41,7 @@ function App() {
       <Router>
         <div className="App">
           <Header />
-          <Home songs={songs} setSongs={setSongs} songsLoading={songsLoading} />
+          <Home songs={songs} setSongs={setSongs} songsLoading={songsLoading} sets={sets} setSets={setSets} setsLoading={setsLoading}/>
         </div>
       </Router>
     </APIErrorProvider>

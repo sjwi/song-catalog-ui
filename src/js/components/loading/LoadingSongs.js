@@ -2,7 +2,7 @@ import React from 'react'
 
 export default function LoadingSongs(props) {
   return (
-    <div role="status" className="p-4 pt-0 space-y-4 max-w-md rounded divide-y divide-gray-200 shadow animate-pulse dark:divide-gray-700 md:p-6 dark:border-gray-700">
+    <div role="status" className="p-4 pt-0 space-y-4 max-w-md rounded divide-y divide-gray-200 shadow animate-pulse dark:divide-gray-700 md:p-6 dark:border-gray-700 w-screen">
       {
       [...Array(30)].map((x,i) => 
         <div key={i} className="flex justify-between items-center pt-4">
