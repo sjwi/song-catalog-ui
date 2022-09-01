@@ -25,3 +25,26 @@ hr {
 .min-w-screen {
   min-width: 100vw;
 }
+
+.min-h-50 {
+ min-height: 12rem;
+}
+
+.w-88 {
+  width: 23rem;
+}
+
+.max-w-101 {
+  max-width: 30rem;
+}
+
+.text-xxs {
+  font-size: .65rem;
+}
+
+.circle-shadow {
+  box-shadow: 2px 2px  7px rgba(0,0,0,0.4);
+  /* -moz-box-shadow: 10px 10px  5px rgba(0,0,0,0.6);
+  -webkit-box-shadow: 10px 10px  5px rgba(0,0,0,0.6);
+  -o-box-shadow: 10px 10px  5px rgba(0,0,0,0.6); */
+}

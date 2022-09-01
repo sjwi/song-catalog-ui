@@ -76,7 +76,7 @@ export default function Header() {
                 <div className="absolute inset-y-0 right-0 flex items-center pr-2 md:static md:inset-auto md:ml-6 md:pr-0">
                   <Search classes="hidden md:block" />
                   {role == ROLES.viewer &&
-                    <button className="text-white text-xl background-transparent font-bold px-2 text-xs outline-none focus:outline-none my-1 mx-1 ease-linear transition-all duration-150" type="button"
+                    <button className="text-white text-sm background-transparent font-medium px-2 outline-none focus:outline-none my-1 mx-1 ease-linear transition-all duration-150" type="button"
                       onClick={() => setIsLoginOpen(true)}>
                       Login
                     </button>

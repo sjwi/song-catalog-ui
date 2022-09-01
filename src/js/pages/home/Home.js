@@ -7,7 +7,7 @@ import SongList from 'js/components/songs/SongList'
 export default function Home(props){
   return (
     <div className="flex overflow-x-auto snap-x snap-mandatory min-w-screen">
-      <div className="flex min-w-screen snap-start bg-grey-100 overflow-y-scroll max-h-screen scrollbar-hide" id="songPage">
+      <div className="flex min-w-screen snap-start bg-white overflow-y-scroll max-h-screen scrollbar-hide" id="songPage">
         {props.songsLoading && <LoadingSongs/>}
         {!props.songsLoading && <SongList songs={props.songs} setSongs={props.setSongs}/>}
       </div>
