@@ -1,1 +1,1 @@
-export const BASE_URL = '/sc-v3'
+export const BASE_URL = ''

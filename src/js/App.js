@@ -39,7 +39,7 @@ function App() {
   return (
     <APIErrorProvider>
       <Router>
-        <div className="App">
+        <div className="App scrollbar-hide">
           <Header />
           <Home songs={songs} setSongs={setSongs} songsLoading={songsLoading} sets={sets} setSets={setSets} setsLoading={setsLoading}/>
         </div>
