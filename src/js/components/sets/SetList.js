@@ -6,8 +6,9 @@ export default function SetList(props) {
   return (
     <div className="min-w-screen">
       {
-        props.sets.map((s) =>
-          <SetContainer key={s.id} set={s} />
+        props.sets.map((s) => {
+          return <SetContainer key={`${props.sets.id}-${s.id}`} set={s} songs={props.songs} />
+        }
         )
       }
     </div>

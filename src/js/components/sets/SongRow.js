@@ -2,7 +2,7 @@ import React from 'react'
 
 function SongRow(props) {
   return (
-    <tr key={props.song.id} className="border-b border-t border-grey-300 text-slate-500 max-h-1 text-sm">
+    <tr className="border-b border-t border-grey-300 text-slate-500 max-h-1 text-sm">
       <td className="w-4 my-auto">
         <div className="w-100">
           <svg id="icon" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">

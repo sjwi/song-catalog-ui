@@ -28,7 +28,7 @@ export default function Header(props) {
       <Sidebar navigation={navigation} isOpen={isNavOpen} setIsOpen={setIsNavOpen} />
       <Login isOpen={isLoginOpen} setIsOpen={setIsLoginOpen} setRole={setRole} />
       <APIErrorNotification />
-      <Disclosure as="nav" className={`bg-blue min-w-screen fixed ${props.scrollPos === SCROLL_DOWN? "-top-14" : "top-0"} h-14 z-10 transition-all duration-500`}>
+      <Disclosure as="nav" className={`bg-blue min-w-screen fixed ${props.scrollPos === SCROLL_DOWN? "-top-14" : "top-0"} h-14 z-10 transition-all duration-300`}>
         {({ open }) => (
           <>
             <div className="max-w-7xl mx-auto px-2 md:px-6 lg:px-8">

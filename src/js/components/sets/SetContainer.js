@@ -20,7 +20,10 @@ export default function SetContainer(props) {
         <table className="table-fixed border-collapse table-fixed w-full text-md text-left">
           <tbody>
             {
-              props.set.songs.map(s => <SongRow song={s} />)
+              props.set.songs.map(s => {
+                let storedS = props.songs.filter((song) => song.id === s.id)[0];
+                return <SongRow key={s.setSongId} song={storedS} />
+              })
             }
           </tbody>
         </table>
