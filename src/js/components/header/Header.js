@@ -9,6 +9,7 @@ import { classNames } from 'js/functions/styling'
 import { getUserRole, getUserObject } from 'js/auth/TokenManager'
 import { ROLES } from 'js/auth/PermissionsMap'
 import APIErrorNotification from '../errors/APIErrorNotification'
+import { SCROLL_DOWN } from 'js/App.js'
 
 const navigation = [
   { name: 'Songs', href: '#', current: true },
@@ -27,7 +28,7 @@ export default function Header(props) {
       <Sidebar navigation={navigation} isOpen={isNavOpen} setIsOpen={setIsNavOpen} />
       <Login isOpen={isLoginOpen} setIsOpen={setIsLoginOpen} setRole={setRole} />
       <APIErrorNotification />
-      <Disclosure as="nav" className={`bg-blue min-w-screen fixed ${props.scrollPos === "down" ? "-top-14" : "top-0"} h-14 z-10 transition-all duration-500`}>
+      <Disclosure as="nav" className={`bg-blue min-w-screen fixed ${props.scrollPos === SCROLL_DOWN? "-top-14" : "top-0"} h-14 z-10 transition-all duration-500`}>
         {({ open }) => (
           <>
             <div className="max-w-7xl mx-auto px-2 md:px-6 lg:px-8">

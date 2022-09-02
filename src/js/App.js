@@ -11,12 +11,16 @@ import axios from 'axios';
 import { BASE_URL } from './clients/ClientConfig';
 import Home from './pages/home/Home';
 
+const HEADER_HEIGHT = 56;
+export const SCROLL_UP = "UP";
+export const SCROLL_DOWN = "DOWN";
+
 function App() {
   const [ songs, setSongs ] = useState([]);
   const [ songsLoading, setSongsLoading ] = useState(true);
   const [ sets, setSets ] = useState([]);
   const [ setsLoading, setSetsLoading ] = useState(true);
-  const [scrollPos, setScrollPos ] = useState("up");
+  const [scrollPos, setScrollPos ] = useState(SCROLL_UP);
 
   const getSongs = () => {
     axios.get(BASE_URL + '/songs')
@@ -53,7 +57,10 @@ function App() {
     let dir = scrollPos;
     if (targId in scrollPositions) {
       let prevPos = scrollPositions[targId];
-      dir = curPos - prevPos > 0 ? "down": "up";
+      if (curPos > HEADER_HEIGHT)
+        dir = curPos - prevPos > 0 ? SCROLL_DOWN : SCROLL_UP;
+      else
+        dir = SCROLL_UP;
     }
     scrollPositions[targId] = curPos;
     console.log(dir);

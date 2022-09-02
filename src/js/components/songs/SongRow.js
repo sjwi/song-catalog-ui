@@ -2,7 +2,7 @@ import React from 'react'
 
 function SongRow(props) {
   return (
-    <tr className="border-b border-grey-300 text-slate-500 max-h-1">
+    <tr className="border-b border-t border-grey-300 text-slate-500 max-h-1">
       <td className="py-3 w-8 text-right">
         <input type="checkbox" className="self-center flex float-right w-5 h-5 text-blue-600 bg-gray-100 border-gray-300 rounded-full hover:ring-0 focus:ring-0 text-blue"></input>
       </td>
