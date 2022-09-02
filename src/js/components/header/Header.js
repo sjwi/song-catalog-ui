@@ -17,47 +17,17 @@ const navigation = [
 ]
 
 
-export default function Header() {
-  const [scrollDir, setScrollDir] = useState("scrolling down");
-
-  useEffect(() => {
-    const threshold = 0;
-    let lastScrollY = window.pageYOffset;
-    let ticking = false;
-
-    const updateScrollDir = () => {
-      const scrollY = window.pageYOffset;
-
-      if (Math.abs(scrollY - lastScrollY) < threshold) {
-        ticking = false;
-        return;
-      }
-      setScrollDir(scrollY > lastScrollY ? "down" : "up");
-      lastScrollY = scrollY > 0 ? scrollY : 0;
-      ticking = false;
-    };
-
-    const onScroll = () => {
-      if (!ticking) {
-        window.requestAnimationFrame(updateScrollDir);
-        ticking = true;
-      }
-    };
-
-    window.addEventListener("scroll", onScroll);
-    console.log(scrollDir);
-    return () => window.removeEventListener("scroll", onScroll);
-  }, [scrollDir]);
-
+export default function Header(props) {
   const [isNavOpen, setIsNavOpen] = useState(false);
   const [isLoginOpen, setIsLoginOpen] = useState(false);
   const [role, setRole] = useState(getUserRole());
+  const scrollPosition = 0;
   return (
     <div>
       <Sidebar navigation={navigation} isOpen={isNavOpen} setIsOpen={setIsNavOpen} />
       <Login isOpen={isLoginOpen} setIsOpen={setIsLoginOpen} setRole={setRole} />
       <APIErrorNotification />
-      <Disclosure as="nav" className={`bg-blue min-w-screen sticky ${scrollDir === "down" ? "-top-14" : "top-0"} h-14 `}>
+      <Disclosure as="nav" className={`bg-blue min-w-screen fixed ${props.scrollPos === "down" ? "-top-14" : "top-0"} h-14 z-10 transition-all duration-500`}>
         {({ open }) => (
           <>
             <div className="max-w-7xl mx-auto px-2 md:px-6 lg:px-8">

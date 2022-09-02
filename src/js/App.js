@@ -16,6 +16,7 @@ function App() {
   const [ songsLoading, setSongsLoading ] = useState(true);
   const [ sets, setSets ] = useState([]);
   const [ setsLoading, setSetsLoading ] = useState(true);
+  const [scrollPos, setScrollPos ] = useState("up");
 
   const getSongs = () => {
     axios.get(BASE_URL + '/songs')
@@ -44,12 +45,27 @@ function App() {
     console.error = () => {}
     console.debug = () => {}
   }
+
+  let scrollPositions = {}
+  const listenScrollEvent = (e) => {
+    const targId = e.target.id;
+    const curPos = document.getElementById(targId).scrollTop;
+    let dir = scrollPos;
+    if (targId in scrollPositions) {
+      let prevPos = scrollPositions[targId];
+      dir = curPos - prevPos > 0 ? "down": "up";
+    }
+    scrollPositions[targId] = curPos;
+    console.log(dir);
+    setScrollPos(dir);
+  }
+
   return (
     <APIErrorProvider>
       <Router>
         <div className="App scrollbar-hide text-t-primary">
-          <Header />
-          <Home songs={songs} setSongs={setSongs} songsLoading={songsLoading} sets={sets} setSets={setSets} setsLoading={setsLoading}/>
+          <Header scrollPos={scrollPos}/>
+          <Home songs={songs} setSongs={setSongs} songsLoading={songsLoading} sets={sets} setSets={setSets} setsLoading={setsLoading} listenScrollEvent={listenScrollEvent} />
         </div>
       </Router>
     </APIErrorProvider>
