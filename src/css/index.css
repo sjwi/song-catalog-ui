@@ -53,3 +53,11 @@ hr {
   -webkit-mask-image: linear-gradient(to bottom, black 80%, transparent 100%);
   mask-image: linear-gradient(to bottom, black 80%, transparent 100%);
 }
+
+.header {
+  position: sticky;
+  top: 0px;
+}
+.-top-14 {
+  top: -3.5rem;
+}

@@ -1,5 +1,5 @@
 /* This example requires Tailwind CSS v2.0+ */
-import { Fragment, useState } from 'react'
+import { Fragment, useState, useEffect } from 'react'
 import { Disclosure, Menu, Transition, Dialog } from '@headlessui/react'
 import { MenuIcon, XIcon, ChevronDownIcon } from '@heroicons/react/outline'
 import Search from './Search'
@@ -16,7 +16,39 @@ const navigation = [
   { name: 'Orgs', href: '#', current: false },
 ]
 
+
 export default function Header() {
+  const [scrollDir, setScrollDir] = useState("scrolling down");
+
+  useEffect(() => {
+    const threshold = 0;
+    let lastScrollY = window.pageYOffset;
+    let ticking = false;
+
+    const updateScrollDir = () => {
+      const scrollY = window.pageYOffset;
+
+      if (Math.abs(scrollY - lastScrollY) < threshold) {
+        ticking = false;
+        return;
+      }
+      setScrollDir(scrollY > lastScrollY ? "down" : "up");
+      lastScrollY = scrollY > 0 ? scrollY : 0;
+      ticking = false;
+    };
+
+    const onScroll = () => {
+      if (!ticking) {
+        window.requestAnimationFrame(updateScrollDir);
+        ticking = true;
+      }
+    };
+
+    window.addEventListener("scroll", onScroll);
+    console.log(scrollDir);
+    return () => window.removeEventListener("scroll", onScroll);
+  }, [scrollDir]);
+
   const [isNavOpen, setIsNavOpen] = useState(false);
   const [isLoginOpen, setIsLoginOpen] = useState(false);
   const [role, setRole] = useState(getUserRole());
@@ -25,7 +57,7 @@ export default function Header() {
       <Sidebar navigation={navigation} isOpen={isNavOpen} setIsOpen={setIsNavOpen} />
       <Login isOpen={isLoginOpen} setIsOpen={setIsLoginOpen} setRole={setRole} />
       <APIErrorNotification />
-      <Disclosure as="nav" className="bg-blue min-w-screen">
+      <Disclosure as="nav" className={`bg-blue min-w-screen sticky ${scrollDir === "down" ? "-top-14" : "top-0"} h-14 `}>
         {({ open }) => (
           <>
             <div className="max-w-7xl mx-auto px-2 md:px-6 lg:px-8">

@@ -3,7 +3,7 @@ import SongRow from './SongRow'
 
 export default function SetContainer(props) {
   return (
-    <div className="relative w-88 sm:w-full max-w-101 rounded my-6 min-h-50 shadow-lg mx-auto bg-white">
+    <div key={props.set.id} className="relative w-88 sm:w-full max-w-101 rounded mb-6 mt-3 min-h-50 shadow-lg mx-auto bg-white">
       <div className="absolute left-4 top-3 text-xxs font-light">
         {props.set.nameSuffix}
       </div>

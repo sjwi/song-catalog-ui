@@ -2,22 +2,22 @@ import React from 'react'
 
 function SongRow(props) {
   return (
-    <tr className="border-b border-t border-grey-300 text-slate-500 max-h-1 text-sm">
+    <tr key={props.song.id} className="border-b border-t border-grey-300 text-slate-500 max-h-1 text-sm">
       <td className="w-4 my-auto">
         <div className="w-100">
           <svg id="icon" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
             <polygon points="16 28 9 21 10.41 19.59 16 25.17 21.59 19.59 23 21 16 28"/>
             <polygon points="16 4 23 11 21.59 12.41 16 6.83 10.41 12.41 9 11 16 4"/>
-            <rect class="fill-transparent" data-name="&lt;Transparent Rectangle&gt;" height="32" id="_Transparent_Rectangle_" width="32"/>
+            <rect className="fill-transparent" data-name="&lt;Transparent Rectangle&gt;" height="32" id="_Transparent_Rectangle_" width="32"/>
           </svg>
         </div>
       </td>
-      <td className="py-1 pl-2 text-xs font-light">
+      <td key={props.song.id} className="py-1 pl-2 text-xs font-light">
         {props.song.name}
       </td>
       <td className="w-12">
         <select id="setKey" className="relative my-1 bg-gray-50 border border-gray-300 text-gray-900 text-xs rounded-lg focus:ring-blue focus:border-blue-500 block w-full p-1">
-          <option selected>G</option>
+          <option value="G">G</option>
           <option>C</option>
         </select>
       </td>

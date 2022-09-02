@@ -11,25 +11,33 @@ import axios from 'axios';
 import { BASE_URL } from './clients/ClientConfig';
 import Home from './pages/home/Home';
 
-
 function App() {
   const [ songs, setSongs ] = useState([]);
   const [ songsLoading, setSongsLoading ] = useState(true);
   const [ sets, setSets ] = useState([]);
   const [ setsLoading, setSetsLoading ] = useState(true);
-  useEffect(() => {
+
+  const getSongs = () => {
     axios.get(BASE_URL + '/songs')
       .then((response) => {
         setSongs(response.data);
         setSongsLoading(false);
       })
-  },[])
-  useEffect(() => {
+  }
+
+  const getSets = () => {
     axios.get(BASE_URL + '/setlists')
       .then((response) => {
         setSets(response.data);
         setSetsLoading(false);
       })
+  }
+
+  useEffect(() => {
+    getSongs()
+  },[])
+  useEffect(() => {
+    getSets()
   },[])
   if (process.env.NODE_ENV === 'production') {
     console.log = () => {}
