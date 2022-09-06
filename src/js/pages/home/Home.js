@@ -1,16 +1,23 @@
 import LoadingSongs from 'js/components/loading/LoadingSongs'
 import LoadingSets from 'js/components/loading/LoadingSets'
-import React, { Component } from 'react'
+import React, { Component, useEffect, useState } from 'react'
 import SetList from 'js/components/sets/SetList'
 import SongList from 'js/components/songs/SongList'
 import AddButton from 'js/components/buttons/AddButton'
 import { getSongs } from 'js/clients/SongClient'
 import { getSets } from 'js/clients/SetClient'
 import { useQuery } from 'react-query'
+import CreateItem from 'js/flyouts/CreateItem'
 
 export default function Home(props){
-  const { data: songs, status: songStatus, isFetching: areSongsFetching } = useQuery('songs', getSongs);
-  const { data: sets, status: setsStatus, isFetching: areSetsFetching } = useQuery('sets', getSets);
+  const { data: songs, status: songStatus, isFetching: areSongsFetching } = useQuery('songs', getSongs, {refetchOnWindowFocus: false});
+  const { data: sets, status: setsStatus, isFetching: areSetsFetching } = useQuery('sets', getSets, {refetchOnWindowFocus: false});
+
+  const [ openCreateItem, setOpenCreateItem ] = useState(false);
+
+  useEffect(() => {
+    document.title = props.title;
+  })
 
   /*
     Example of 'invalidating' the songs to be reloaded
@@ -30,7 +37,8 @@ export default function Home(props){
         {areSetsFetching || areSongsFetching && <LoadingSets/>}
         {!areSetsFetching && !areSongsFetching && <SetList sets={sets} songs={songs}/>}
       </div>
-      <AddButton bg="bg-blue" className="z-50" />
+      <AddButton bg="bg-blue" className="z-50" openCreateItem={openCreateItem} setOpenCreateItem={setOpenCreateItem} />
+      <CreateItem className="z-60" openCreateItem={openCreateItem} setOpenCreateItem={setOpenCreateItem} />
     </div>
   )
 }

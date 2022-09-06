@@ -1,6 +1,5 @@
-import logo from 'resources/logo.svg';
 import Header from 'js/components/header/Header.js'
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Switch } from 'react-router-dom';
 import 'css/App.css';
 import 'css/index.css';
 import 'css/colors.css';
@@ -11,6 +10,7 @@ import axios from 'axios';
 import { BASE_URL } from './clients/ClientConfig';
 import Home from './pages/home/Home';
 import { QueryClient, QueryClientProvider, useQuery } from 'react-query';
+import SetList from './pages/setlist/SetList';
 
 const HEADER_HEIGHT = 56;
 export const SCROLL_UP = "UP";
@@ -45,12 +45,16 @@ function App() {
   return (
     <APIErrorProvider>
       <QueryClientProvider client={queryClient}>
-        <Router>
-          <div className="App scrollbar-hide text-t-primary">
-            <Header scrollPos={scrollPos}/>
-            <Home listenScrollEvent={listenScrollEvent} />
-          </div>
-        </Router>
+        <div className="App scrollbar-hide text-t-primary">
+          <Header scrollPos={scrollPos}/>
+          <BrowserRouter>
+            <Routes>
+              <Route path="/" element={<Home listenScrollEvent={listenScrollEvent} title="Song Catalog" />}/>
+              <Route path="/song/*" element={<Home listenScrollEvent={listenScrollEvent} title="Song Catalog" />}/>
+              <Route path="/set/:id" element={<SetList listenScrollEvent={listenScrollEvent} />}/>
+            </Routes>
+          </BrowserRouter>
+        </div>
       </QueryClientProvider>
     </APIErrorProvider>
   );

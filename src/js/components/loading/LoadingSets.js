@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default function LoadingSongs(props) {
+export default function LoadingSets(props) {
   return (
     <div role="status" className="p-4 max-w shadow animate-pulse md:p-6 dark:border-gray-700 w-screen">
       {

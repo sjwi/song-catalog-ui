@@ -48,11 +48,13 @@ export default function Header(props) {
                 <div className="flex-1 flex items-center justify-center md:items-stretch md:justify-start">
                   <div className="flex-shrink-0 flex items-center">
                     <img
+                      onClick={() => window.location.reload()}
                       className="block md:hidden h-10 w-fill object-cover"
                       src="/images/favicon_white.png"
                       alt="Workflow"
                     />
                     <img
+                      onClick={() => window.location.reload()}
                       className="hidden md:block h-10 w-fill object-cover"
                       src="/images/favicon_white.png"
                       alt="Workflow"

@@ -11,6 +11,7 @@ module.exports = {
     fontFamily: {
       sans: ['Graphik', 'sans-serif'],
       serif: ['Merriweather', 'serif'],
+      song: ['Lato', 'sans-serif'],
     },
     colors: {
       'blue': '#00b3ff',

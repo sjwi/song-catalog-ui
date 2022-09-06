@@ -2,6 +2,7 @@ import React, { Fragment, Component } from 'react'
 import { XIcon } from '@heroicons/react/outline'
 import { Transition, Dialog } from '@headlessui/react'
 import { classNames } from 'js/functions/styling';
+import Overlay from '../modals/Overlay';
 
 export default class Sidebar extends Component {
   constructor(props) {
@@ -46,16 +47,7 @@ export default class Sidebar extends Component {
               </div>
             </div>
           </Transition.Child>
-          <Transition.Child
-            enter="transition-opacity ease-linear duration-200"
-            enterFrom="opacity-0"
-            enterTo="opacity-100"
-            leave="transition-opacity ease-linear duration-200"
-            leaveFrom="opacity-100"
-            leaveTo="opacity-0"
-            as={Fragment}>
-            <Dialog.Overlay className="fixed inset-0 bg-grey-600 bg-opacity-50"></Dialog.Overlay>
-          </Transition.Child>
+          <Overlay />
         </Dialog>
       </Transition>
     )

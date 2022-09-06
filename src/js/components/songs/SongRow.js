@@ -1,16 +1,19 @@
 import React from 'react'
+import { buildFocusedSong } from 'js/functions/songs';
 
 function SongRow(props) {
-  const openSong = () => {
-    props.setFocusedSong(props.song);
+  const openSongPage = (e) => {
+    props.setFocusedSong(buildFocusedSong(props.song, props.songs));
     props.setOpenSong(true);
+    document.title = props.song.name
+    window.history.pushState({"pageTitle":props.song.name},"", "/song/" + props.song.id);
   }
   return (
     <tr className="border-b border-t border-grey-300 text-slate-500 max-h-1">
       <td className="py-3 w-8 text-right">
         <input type="checkbox" className="self-center flex float-right w-5 h-5 text-blue-600 bg-gray-100 border-gray-300 rounded-full hover:ring-0 focus:ring-0 text-blue"></input>
       </td>
-      <td className="py-3 pl-3 truncate font-light text-sm truncate" onClick={openSong}>
+      <td className="py-3 pl-3 truncate font-light text-sm truncate" onClick={openSongPage}>
         {props.song.name}
       </td>
       <td className="py-3 w-8 text-right">
