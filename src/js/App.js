@@ -9,7 +9,7 @@ import Home from './pages/home/Home';
 import { QueryClient, QueryClientProvider, useQuery } from 'react-query';
 import SetList from './pages/setlist/SetList';
 
-const HEADER_HEIGHT = 56;
+export const HEADER_HEIGHT = 56;
 export const SCROLL_UP = "UP";
 export const SCROLL_DOWN = "DOWN";
 
@@ -25,8 +25,13 @@ function App(props) {
 
   let scrollPositions = {}
   const listenScrollEvent = (e) => {
-    const targId = e.target.id;
-    const curPos = document.getElementById(targId).scrollTop;
+    const targId = e.target.id == null? 'body': e.target.id;
+    let curPos;
+    if (targId == 'body') {
+      curPos = window.scrollY;
+    } else {
+      curPos = document.getElementById(targId).scrollTop;
+    }
     let dir = scrollPos;
     if (targId in scrollPositions) {
       let prevPos = scrollPositions[targId];
@@ -38,6 +43,9 @@ function App(props) {
     scrollPositions[targId] = curPos;
     setScrollPos(dir);
   }
+  document.getElementsByTagName('body')[0].onscroll = (e) => {
+    listenScrollEvent(e)
+  };
 
   return (
     <APIErrorProvider>
@@ -46,8 +54,8 @@ function App(props) {
           <Header scrollPos={scrollPos}/>
             <BrowserRouter>
               <Routes>
-                <Route path="/" element={<Home listenScrollEvent={listenScrollEvent} title="Song Catalog" />}/>
-                <Route path="/song/*" element={<Home listenScrollEvent={listenScrollEvent} title="Song Catalog" />}/>
+                <Route path="/" element={<Home listenScrollEvent={listenScrollEvent} title="Song Catalog" setScrollPos={setScrollPos} />}/>
+                <Route path="/song/*" element={<Home listenScrollEvent={listenScrollEvent} setScrollPos={setScrollPos} title="Song Catalog" />}/>
                 <Route path="/set/:id" element={<SetList listenScrollEvent={listenScrollEvent} />}/>
               </Routes>
             </BrowserRouter>
