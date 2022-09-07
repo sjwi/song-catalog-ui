@@ -44,17 +44,18 @@ export default function Home(props){
         dirRef.current = RIGHT;
         histRef.current[LEFT] = window.pageYOffset;
         window.scrollTo(0, histRef.current[RIGHT]);
-        console.log(histRef.current)
-      }
-      if (window.pageYOffset > HEADER_HEIGHT) {
-        props.setScrollPos(SCROLL_DOWN)
+        if (window.pageYOffset > HEADER_HEIGHT) {
+          props.setScrollPos(SCROLL_DOWN)
+        }
       }
     } else if (x < positionRef.current) {
       if (dirRef.current != LEFT) {
         dirRef.current = LEFT;
         histRef.current[RIGHT] = window.pageYOffset;
         window.scrollTo(0, histRef.current[LEFT]);
-        console.log(histRef.current)
+        if (window.pageYOffset > HEADER_HEIGHT) {
+          props.setScrollPos(SCROLL_DOWN)
+        }
       }
     }
     positionRef.current = x;
