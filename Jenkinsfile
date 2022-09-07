@@ -5,11 +5,10 @@ pipeline {
     }
     stages {
         stage('Deploy') {
-            // when {
-            //   expression { env.BRANCH == "master" }
-            // }
+            when {
+              expression { env.BRANCH == "origin/master" }
+            }
             steps {
-                echo "$env.BRANCH"
                 sh '''
                   npm i
                   npm run build
