@@ -1,13 +1,15 @@
 import React from 'react'
+import { useNavigate } from 'react-router-dom';
 import SongRow from './SongRow'
 
 export default function SetContainer(props) {
+  const navigate = useNavigate();
   return (
     <div key={props.set.id} className="relative w-88 sm:w-full max-w-101 rounded mb-6 mt-3 min-h-50 shadow-lg mx-auto bg-white">
       <div className="absolute left-4 top-3 text-xxs font-light">
         {props.set.nameSuffix}
       </div>
-      <div className="pt-7 font-normal">
+      <div className="pt-7 font-normal" onClick={() => navigate(`/set/${props.set.id}`, { state : { songs: props.songs } })}>
         {props.set.namePrefix}
       </div>
       <div className="absolute right-4 top-3">
@@ -20,9 +22,9 @@ export default function SetContainer(props) {
         <table className="table-fixed border-collapse table-fixed w-full text-md text-left">
           <tbody>
             {
-              props.set.songs.map(s => {
+              props.set.songs.map((s,i) => {
                 let storedS = props.songs.filter((song) => song.id === s.id)[0];
-                return <SongRow key={s.setSongId} song={storedS} />
+                return <SongRow key={`${s.id}-${props.set.id}-${i}`} song={storedS} />
               })
             }
           </tbody>

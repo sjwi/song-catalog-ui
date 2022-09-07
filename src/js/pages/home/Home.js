@@ -33,7 +33,7 @@ export default function Home(props){
         {areSongsFetching && <LoadingSongs/>}
         {!areSongsFetching  && <SongList songs={songs}/>}
       </div>
-      <div className="flex min-w-screen snap-start bg-grey-200 overflow-y-scroll max-h-screen scrollbar-hide fade-container py-14" onScroll={props.listenScrollEvent} id="setPage">
+      <div className="flex min-w-screen snap-start bg-grey-300 overflow-y-scroll max-h-screen scrollbar-hide fade-container py-14" onScroll={props.listenScrollEvent} id="setPage">
         {areSetsFetching || areSongsFetching && <LoadingSets/>}
         {!areSetsFetching && !areSongsFetching && <SetList sets={sets} songs={songs}/>}
       </div>

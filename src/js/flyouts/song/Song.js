@@ -9,7 +9,7 @@ function Song(props) {
           {props.song.name}
         </h1>
         <hr className="z-20 mx-4 mb-0 mt-3 rounded-full opacity-50"/>
-        <p className="text-left whitespace-pre mt-3 px-4 pb-16">
+        <p className="text-left whitespace-pre mt-3 px-4 pb-16 text-sm">
           {props.song.body}
         </p>
       </div>
