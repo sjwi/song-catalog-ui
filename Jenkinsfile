@@ -12,9 +12,7 @@ pipeline {
                 sh '''
                   sudo npm i
                   sudo npm run build
-                  echo "DONE"
                   sudo cp -r build/* /var/www/html/
-                  echo "DONE2"
                 '''
             }
         }
