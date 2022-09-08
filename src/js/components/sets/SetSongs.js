@@ -4,13 +4,14 @@ import {SCROLL_DOWN, SCROLL_UP } from 'js/App'
 
 function SetSongs(props) {
 
-  const refRunning = useRef(false);
+  const [ atBottom, setAtBottom ] = useState(false);
 
   useEffect(() => {
-    
     const handleScroll = event => {
-      if (window.scrollY == 0)
-        refRunning.current = false;
+      if ((window.innerHeight + window.scrollY) >= document.body.scrollHeight)
+        setAtBottom(true);
+      else
+        setAtBottom(false);
     };
 
     window.addEventListener('scroll', handleScroll);
@@ -18,29 +19,8 @@ function SetSongs(props) {
     return () => {
       window.removeEventListener('scroll', handleScroll);
     };
-  }, [])
+  }, []);
 
-  let setScrollPositions = {}
-  const scrollDown = (e) => {
-    const targId = e.target.id;
-    const curPos = document.getElementById(targId).scrollTop;
-    let dir = SCROLL_UP;
-    if (targId in setScrollPositions) {
-      let prevPos = setScrollPositions[targId];
-      dir = curPos - prevPos > 0 ? SCROLL_DOWN : SCROLL_UP;
-    }
-    if (dir == SCROLL_DOWN) {
-      if (!refRunning.current) {
-        refRunning.current = true;
-        window.scrollTo({
-          top: window.innerHeight,
-          left: 0,
-          behavior: 'smooth'
-        });
-      }
-    }
-    setScrollPositions[targId] = curPos;
-  }
   return (
     <div className="flex overflow-x-auto snap-x snap-mandatory scrollbar-hide h-full bg-grey-200 px-3 scroll-smooth">
       {
@@ -48,7 +28,7 @@ function SetSongs(props) {
           return (
             <div key={s.id} className="flex snap-start min-w-screen w-screen h-full rounded px-2">
               <div className="bg-white w-full rounded">
-                <div id={`set-song-container-${s.setListSongId}`} className="w-full h-full overflow-y-scroll overflow-x-hide text-center text-primary song scrollbar-hide" onScroll={scrollDown}>
+                <div id={`set-song-container-${s.setListSongId}`} className={`w-full h-full ${atBottom? "overflow-y-scroll": "overflow-y-hidden"} overflow-x-hide text-center text-primary song scrollbar-hide`} >
                   <h1 className="text-xl mt-12">
                     {s.name}
                   </h1>
