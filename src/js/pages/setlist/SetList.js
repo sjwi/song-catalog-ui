@@ -6,6 +6,8 @@ import { useLocation } from 'react-router-dom'
 import { useParams } from 'react-router-dom'
 import LoadingSet from 'js/components/loading/LoadingSet'
 import Set from 'js/components/sets/Set'
+import { SCROLL_UP } from 'js/App'
+import { SCROLL_DOWN } from 'js/App'
 
 function SetList(props) {
   const {id} = useParams()
@@ -22,9 +24,13 @@ function SetList(props) {
       },
     }
     );
+  
+  useEffect(() => {
+    props.setStickyNav(false);
+  },[])
 
   return (
-    <div id="setList" className="h-screen overflow-y-scroll snap-y snap-mandatory scroll-smooth" onScroll={props.listenScrollEvent}>
+    <div id="setList" className="scroll-smooth">
       {isSetFetching || songs === undefined &&
         <LoadingSet />
       }

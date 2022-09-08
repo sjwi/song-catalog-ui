@@ -8,7 +8,7 @@ function Set(props) {
   }, [])
   return (
     <div className="w-screen bg-grey-300">
-      <div className="pt-14 snap-start">
+      <div className="pt-1 snap-start">
         <SetContainer set={props.set} songs={props.songs} />
       </div>
       <div className="py-2 h-screen snap-start">

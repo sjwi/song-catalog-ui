@@ -19,6 +19,7 @@ export default function Home(props){
 
   useEffect(() => {
     document.title = props.title;
+    props.setStickyNav(true);
   },[])
 
   /*
@@ -29,8 +30,6 @@ export default function Home(props){
       }
     })
   */
-  var scrollHistory = {
-  }
   const positionRef = React.useRef(0);
   const LEFT = "left";
   const RIGHT = "right";
@@ -39,24 +38,18 @@ export default function Home(props){
 
   const handleHorizontalScroll = (e) => {
     const x = e.currentTarget.scrollLeft;
-    if (x > positionRef.current) {
-      if (dirRef.current != RIGHT) {
-        dirRef.current = RIGHT;
-        histRef.current[LEFT] = window.pageYOffset;
-        window.scrollTo(0, histRef.current[RIGHT]);
-        if (window.pageYOffset > HEADER_HEIGHT) {
-          props.setScrollPos(SCROLL_DOWN)
-        }
-      }
-    } else if (x < positionRef.current) {
-      if (dirRef.current != LEFT) {
-        dirRef.current = LEFT;
-        histRef.current[RIGHT] = window.pageYOffset;
-        window.scrollTo(0, histRef.current[LEFT]);
-        if (window.pageYOffset > HEADER_HEIGHT) {
-          props.setScrollPos(SCROLL_DOWN)
-        }
-      }
+    if (x > positionRef.current && dirRef.current != RIGHT) {
+      dirRef.current = RIGHT;
+      histRef.current[LEFT] = window.pageYOffset;
+      window.scrollTo(0, histRef.current[RIGHT]);
+      if (window.pageYOffset > HEADER_HEIGHT)
+        props.setScrollPos(SCROLL_DOWN)
+    } else if (x < positionRef.current && dirRef.current != LEFT) {
+      dirRef.current = LEFT;
+      histRef.current[RIGHT] = window.pageYOffset;
+      window.scrollTo(0, histRef.current[LEFT]);
+      if (window.pageYOffset > HEADER_HEIGHT)
+        props.setScrollPos(SCROLL_DOWN)
     }
     positionRef.current = x;
   };

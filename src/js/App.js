@@ -15,6 +15,7 @@ export const SCROLL_DOWN = "DOWN";
 
 function App(props) {
   const [scrollPos, setScrollPos ] = useState(SCROLL_UP);
+  const [stickyNav, setStickyNav ] = useState(true);
   const queryClient = new QueryClient();
 
   if (process.env.NODE_ENV === 'production') {
@@ -51,12 +52,12 @@ function App(props) {
     <APIErrorProvider>
       <QueryClientProvider client={queryClient}>
         <div className="App scrollbar-hide text-t-primary">
-          <Header scrollPos={scrollPos}/>
+          <Header scrollPos={scrollPos} stickyNav={stickyNav} />
             <BrowserRouter>
               <Routes>
-                <Route path="/" element={<Home listenScrollEvent={listenScrollEvent} title="Song Catalog" setScrollPos={setScrollPos} />}/>
-                <Route path="/song/*" element={<Home listenScrollEvent={listenScrollEvent} setScrollPos={setScrollPos} title="Song Catalog" />}/>
-                <Route path="/set/:id" element={<SetList listenScrollEvent={listenScrollEvent} />}/>
+                <Route path="/" element={<Home listenScrollEvent={listenScrollEvent} title="Song Catalog" setScrollPos={setScrollPos} setStickyNav={setStickyNav} />}/>
+                <Route path="/song/*" element={<Home listenScrollEvent={listenScrollEvent} setScrollPos={setScrollPos} title="Song Catalog" setStickyNav={setStickyNav} />}/>
+                <Route path="/set/:id" element={<SetList scrollState={setScrollPos} setStickyNav={setStickyNav} />}/>
               </Routes>
             </BrowserRouter>
         </div>
