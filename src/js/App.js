@@ -24,40 +24,16 @@ function App(props) {
     console.debug = () => {}
   }
 
-  let scrollPositions = {}
-  const listenScrollEvent = (e) => {
-    const targId = e.target.id == null? 'body': e.target.id;
-    let curPos;
-    if (targId == 'body') {
-      curPos = window.scrollY;
-    } else {
-      curPos = document.getElementById(targId).scrollTop;
-    }
-    let dir = scrollPos;
-    if (targId in scrollPositions) {
-      let prevPos = scrollPositions[targId];
-      if (curPos > HEADER_HEIGHT)
-        dir = curPos - prevPos > 0 ? SCROLL_DOWN : SCROLL_UP;
-      else
-        dir = SCROLL_UP;
-    }
-    scrollPositions[targId] = curPos;
-    setScrollPos(dir);
-  }
-  document.getElementsByTagName('body')[0].onscroll = (e) => {
-    listenScrollEvent(e)
-  };
-
   return (
     <APIErrorProvider>
       <QueryClientProvider client={queryClient}>
         <div className="App scrollbar-hide text-t-primary">
-          <Header scrollPos={scrollPos} stickyNav={stickyNav} />
+          <Header />
             <BrowserRouter>
               <Routes>
-                <Route path="/" element={<Home listenScrollEvent={listenScrollEvent} title="Song Catalog" setScrollPos={setScrollPos} setStickyNav={setStickyNav} />}/>
-                <Route path="/song/*" element={<Home listenScrollEvent={listenScrollEvent} setScrollPos={setScrollPos} title="Song Catalog" setStickyNav={setStickyNav} />}/>
-                <Route path="/set/:id" element={<SetList scrollState={setScrollPos} setStickyNav={setStickyNav} />}/>
+                <Route path="/" element={<Home title="Song Catalog" />}/>
+                <Route path="/song/*" element={<Home title="Song Catalog" />}/>
+                <Route path="/set/:id" element={<SetList />}/>
               </Routes>
             </BrowserRouter>
         </div>

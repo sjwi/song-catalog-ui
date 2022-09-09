@@ -19,7 +19,6 @@ export default function Home(props){
 
   useEffect(() => {
     document.title = props.title;
-    props.setStickyNav(true);
   },[])
 
   /*
@@ -42,14 +41,10 @@ export default function Home(props){
       dirRef.current = RIGHT;
       histRef.current[LEFT] = window.pageYOffset;
       window.scrollTo(0, histRef.current[RIGHT]);
-      if (window.pageYOffset > HEADER_HEIGHT)
-        props.setScrollPos(SCROLL_DOWN)
     } else if (x < positionRef.current && dirRef.current != LEFT) {
       dirRef.current = LEFT;
       histRef.current[RIGHT] = window.pageYOffset;
       window.scrollTo(0, histRef.current[LEFT]);
-      if (window.pageYOffset > HEADER_HEIGHT)
-        props.setScrollPos(SCROLL_DOWN)
     }
     positionRef.current = x;
   };
